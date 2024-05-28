@@ -15,7 +15,6 @@ body {
 
   .card-container {
     width: 400px;
-    height: 460px;
     background-color: #d8d0d0;
 
     .card-background {
@@ -33,6 +32,23 @@ body {
       .card-image {
         width: 100%;
       }
+    }
+
+    .card-title__container {
+      text-align: center;
+      margin: 20px 0 30px;
+    }
+
+    .card-button__container {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 0 30px 0;
+    }
+
+    .card-info__container {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 40px;
     }
   }
 }

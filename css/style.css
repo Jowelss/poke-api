@@ -12,7 +12,6 @@ body {
 }
 body .card-container {
   width: 400px;
-  height: 460px;
   background-color: #d8d0d0;
 }
 body .card-container .card-background {
@@ -29,6 +28,20 @@ body .card-container .card-image__container {
 }
 body .card-container .card-image__container .card-image {
   width: 100%;
+}
+body .card-container .card-title__container {
+  text-align: center;
+  margin: 20px 0 30px;
+}
+body .card-container .card-button__container {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 0 30px 0;
+}
+body .card-container .card-info__container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
 }
 
 /*# sourceMappingURL=style.css.map */
