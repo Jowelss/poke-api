@@ -49,6 +49,13 @@ body {
       display: flex;
       justify-content: space-around;
       margin-bottom: 40px;
+
+      .card-info__item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
     }
   }
 }
