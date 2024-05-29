@@ -10,9 +10,19 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0')
   })
   .catch((err) => console.log(err));
 
-const getPokemon = (data) => {
-  const pokemon = {
-    nombre: data.name,
-    image: data.sprites.front_default,
-  };
+const imagePoke = document.querySelector('.card-image');
+const namePoke = document.getElementById('name-pokemon');
+
+const fragment = document.createDocumentFragment();
+
+const pokemons = [];
+
+const getPokemon = (info) => {
+  pokemons.push({
+    nombre: info.name,
+    altura: info.height,
+    peso: info.weight,
+    image: info.sprites.front_default,
+    exp: info.base_experience,
+  });
 };
