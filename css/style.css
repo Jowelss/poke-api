@@ -9,6 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  font-family: "Open Sans", sans-serif;
 }
 body .card-container {
   width: 400px;
