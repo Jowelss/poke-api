@@ -1,5 +1,4 @@
-const imgPoke = document.createElement('img');
-imgPoke.classList.add('card-image');
+const imgPoke = document.querySelector('.card-image');
 const imgPokeContent = document.getElementById('image-pokemon');
 
 const namePoke = document.getElementById('name-pokemon');
@@ -17,18 +16,24 @@ const pokemons = [];
 let num = 0;
 
 const addPokeCard = () => {
-  imgPoke.src = pokemons[num].image;
-  namePoke.textContent = pokemons[num].nombre;
-  expPoke.textContent = pokemons[num].exp;
-  heightPoke.textContent = pokemons[num].altura;
-  weightPoke.textContent = pokemons[num].peso;
-  imgPokeContent.appendChild(imgPoke);
+  const pokemon = pokemons[num]; // Almacena el elemento
+
+  imgPoke.src = pokemon.image;
+
+  namePoke.textContent = pokemon.nombre.toUpperCase();
+
+  expPoke.textContent = pokemon.exp;
+
+  heightPoke.textContent = pokemon.altura;
+
+  weightPoke.textContent = pokemon.peso;
 };
 
 buttonNext.addEventListener('click', () => {
   if (num < pokemons.length) {
     num++;
   }
+  // Manejar error de la imagen, al usar el lenght en la condicion, el evento no encuentra la image y sale error de valor undifined, arreglar eso
   addPokeCard();
 });
 
@@ -36,6 +41,7 @@ buttonBack.addEventListener('click', () => {
   if (num > 0) {
     num--;
   }
+
   addPokeCard();
 });
 
