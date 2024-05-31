@@ -1,11 +1,14 @@
-// :root {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-// }
+:root {
+  --backgroundColor-black: #18181a;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -13,12 +16,13 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-
-  font-family: 'Open Sans', sans-serif;
+  // background-color: var(--backgroundColor-black);
 
   .card-container {
     width: 400px;
     background-color: #d8d0d0;
+    border-radius: 10px;
+    overflow: hidden;
 
     .card-background {
       width: 100%;
@@ -26,11 +30,12 @@ body {
       background-color: rgb(194, 6, 6);
     }
     .card-image__container {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
+      background-color: #d8d0d0;
       border-radius: 50%;
-      margin: -80px auto 0;
-      overflow: hidden;
+      margin: -60px auto 0;
+      padding: 5px;
 
       .card-image {
         width: 100%;
@@ -39,7 +44,7 @@ body {
 
     .card-title__container {
       text-align: center;
-      margin: 20px 0 30px;
+      margin: 10px 0 30px;
     }
 
     .card-button__container {
