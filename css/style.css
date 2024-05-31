@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --backgroundColor-black: #18181a;
+  --text-color: #fff;
+  --font-weight: 700;
 }
 
 * {
@@ -8,6 +10,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+  color: var(--text-color);
+}
+
+#color-gradient {
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 
 body {
@@ -15,42 +26,78 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-color: var(--backgroundColor-black);
 }
 body .card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
   width: 400px;
-  background-color: #d8d0d0;
   border-radius: 10px;
-  overflow: hidden;
-}
-body .card-container .card-background {
-  width: 100%;
-  height: 160px;
-  background-color: rgb(194, 6, 6);
 }
 body .card-container .card-image__container {
-  width: 120px;
-  height: 120px;
-  background-color: #d8d0d0;
+  width: 200px;
+  height: 150px;
   border-radius: 50%;
-  margin: -60px auto 0;
   padding: 5px;
+  position: relative;
+}
+body .card-container .card-image__container .charging {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  margin: auto;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 1.5s;
+}
+body .card-container .card-image__container .charging .pointer {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+@keyframes charging {
+  0% {
+    transform: rotate(18deg);
+  }
+  100% {
+    transform: rotate(380deg);
+  }
 }
 body .card-container .card-image__container .card-image {
   width: 100%;
 }
 body .card-container .card-title__container {
   text-align: center;
-  margin: 10px 0 30px;
 }
 body .card-container .card-button__container {
   display: flex;
-  justify-content: space-around;
-  margin: 0 0 30px 0;
+  gap: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+body .card-container .card-button__container .button {
+  all: unset;
+  padding: 6px 20px;
+  border: 2px solid #fff;
+  font-weight: var(--font-weight);
+  transition: 0.2s;
+}
+body .card-container .card-button__container .button:hover {
+  transform: scale(1.11, 1.1);
 }
 body .card-container .card-info__container {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 40px;
+  gap: 60px;
+  font-weight: var(--font-weight);
 }
 body .card-container .card-info__container .card-info__item {
   display: flex;
