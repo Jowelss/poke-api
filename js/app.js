@@ -1,52 +1,63 @@
-const imgPoke = document.querySelector('.card-image');
-const imgPokeContent = document.getElementById('image-pokemon');
+// Para ahorrarme el agregar muchas variables
+const elements = {
+  imgPoke: document.querySelector('.card-image'),
+  imgPokeContent: document.getElementById('image-pokemon'),
 
-const namePoke = document.getElementById('name-pokemon');
-const weightPoke = document.getElementById('card-info__weight');
-const expPoke = document.getElementById('card-info__exp');
-const heightPoke = document.getElementById('card-info__height');
+  colorGradient: document.getElementById('color-gradient'),
 
-const fragment = document.createDocumentFragment();
+  namePoke: document.getElementById('name-pokemon'),
+  weightPoke: document.getElementById('card-info__weight'),
+  expPoke: document.getElementById('card-info__exp'),
+  heightPoke: document.getElementById('card-info__height'),
+  colorPoke: document.getElementById('color-pokemon'),
 
-const buttonBack = document.getElementById('button-back');
-const buttonNext = document.getElementById('button-next');
+  fragment: document.createDocumentFragment(),
+
+  buttonBack: document.getElementById('button-back'),
+  buttonNext: document.getElementById('button-next'),
+
+  charging: document.querySelector('.charging'),
+};
 
 const pokemons = [];
 
-let num = 0;
+let currentIndex = 0;
 
 const addPokeCard = () => {
-  const pokemon = pokemons[num]; // Almacena el elemento
+  const pokemon = pokemons[currentIndex]; // Almacena el elemento
 
-  imgPoke.src = pokemon.image;
+  if (!pokemon) return; //
 
-  namePoke.textContent = pokemon.nombre.toUpperCase();
+  elements.imgPoke.src = pokemon.image;
 
-  expPoke.textContent = pokemon.exp;
+  elements.namePoke.textContent = pokemon.nombre.toUpperCase();
 
-  heightPoke.textContent = pokemon.altura;
+  elements.expPoke.textContent = pokemon.exp;
 
-  weightPoke.textContent = pokemon.peso;
+  elements.heightPoke.textContent = pokemon.altura;
+
+  elements.weightPoke.textContent = pokemon.peso;
+
+  elements.colorGradient.style.background = `linear-gradient(${pokemon.color}, var(--backgroundColor-black) 70%)`;
+
+  elements.buttonBack.disabled = currentIndex === 0;
+  elements.buttonNext.disabled = currentIndex === pokemons.length - 1;
 };
 
-buttonNext.addEventListener('click', () => {
-  if (num < pokemons.length) {
-    num++;
-  }
-  // Manejar error de la imagen, al usar el lenght en la condicion, el evento no encuentra la image y sale error de valor undifined, arreglar eso
+elements.buttonNext.addEventListener('click', () => {
+  currentIndex++;
   addPokeCard();
 });
 
-buttonBack.addEventListener('click', () => {
-  if (num > 0) {
-    num--;
-  }
+elements.buttonBack.addEventListener('click', () => {
+  currentIndex--;
 
   addPokeCard();
 });
 
 const fetchPokemonData = async () => {
   try {
+    elements.charging.style.animationName = 'charging';
     const response = await fetch(
       'https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0'
     );
@@ -56,12 +67,17 @@ const fetchPokemonData = async () => {
       try {
         const res = await fetch(element.url);
         const info = await res.json();
+
+        const resColor = await fetch(info.species.url);
+        const colorPoke = await resColor.json();
+
         return {
           nombre: info.name,
           altura: info.height,
           peso: info.weight,
           exp: info.base_experience,
           image: info.sprites.front_default,
+          color: colorPoke.color.name,
         };
       } catch (error) {
         console.log(error);
@@ -69,10 +85,15 @@ const fetchPokemonData = async () => {
     });
 
     const pokemonData = await Promise.all(pokemonPromises);
+
     pokemons.push(...pokemonData);
+
     addPokeCard(pokemons);
   } catch (error) {
     console.log(error);
+  } finally {
+    elements.charging.style.animationName = 'none';
+    elements.charging.style.display = 'none';
   }
 };
 
